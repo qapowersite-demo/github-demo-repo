@@ -1,0 +1,16 @@
+name: Terraform Tests
+on:
+  pull_request:
+    paths:
+      - '**.tf'
+      - 'tests/terraform/**'
+jobs:
+  terraform-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-terraform@v3
+      - run: terraform init
+        working-directory: .
+      - run: terraform test
+        working-directory: .
